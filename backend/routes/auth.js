@@ -5,6 +5,8 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
+const JWT_SECRET = "iti$a$ecret";
+
 // Create a User Using: POSt "/api/auth/createuser". No login required
 router.post('/createuser',
     [
@@ -33,18 +35,57 @@ router.post('/createuser',
                 email: req.body.email,
                 password: secPass
             })
-            data = {
+            const data = {
                 user: {
                     id: user.id
                 }
             }
-            const JWT_SECRET = "iti$a$ecret";
             const authToken = jwt.sign(data, JWT_SECRET);
             res.json(authToken);
 
         } catch (error) {
             console.error(error.message);
-            res.status(500).send("Some error occured");
+            res.status(500).send("Internal Server Error");
+        }
+    })
+
+
+// Authenticate a User Using: POST "/api/auth/login". No login required
+router.post('/login',
+    [
+        body('email', 'Enter a valid email').isEmail(),
+        body('password', 'Password Cannot be blank').exists(),
+    ],
+    async (req, res) => {
+        // If there is errors then send the bad request and the error
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { email, password } = req.body;
+        try {
+            let user = await User.findOne({ email });
+            // check existence in database
+            if (!user) {
+                return res.status(400).json({ error: "Please try to login with correct credentials" });
+            }
+            // Compares the password 
+            const passCompare = await bcrypt.compare(password, user.password);
+            if (!passCompare) {
+                return res.status(400).json({ error: "Please try to login with correct credentials" });
+            }
+            const data = {
+                user: {
+                    id: user.id
+                }
+            }
+            const authToken = jwt.sign(data, JWT_SECRET);
+            res.json(authToken);
+
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).send("Internal Server Error");
         }
     })
 
