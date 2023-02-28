@@ -5,8 +5,6 @@ const { body, validationResult } = require('express-validator');
 
 var fetchuser = require("../middleware/fetchuser");
 
-
-
 // ROUTE 1: Get all the notes Using: GET "/api/notes/fetchallnotes". Login required
 router.get('/fetchallnotes', fetchuser, async (req, res) => {
     try {
@@ -32,7 +30,7 @@ router.post('/addnote', fetchuser,
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
-            
+
             // Destrucutre the data from request body
             const { title, description, tag } = req.body;
 
