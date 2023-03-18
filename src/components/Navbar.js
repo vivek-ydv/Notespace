@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
+  let location = useLocation();
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location]);
+
   return (
     <nav className="navbar navbar-expand-sm bg-light">
       <div className="container-fluid">
@@ -20,11 +26,14 @@ export const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <Link className="nav-link" to="/about">
+            <Link className={`nav-link ${location.pathname === '/' ? "active" : ""}`} to="/">
+              Home
+            </Link>
+            <Link className={`nav-link ${location.pathname === '/about' ? "active" : ""}`} to="/about">
               About
             </Link>
           </div>
-        </div>
+        </div> 
       </div>
     </nav>
 

@@ -1,6 +1,8 @@
-export const About = () => {
+import React from "react";
+
+const About = () => {
     return (
-        <div>Hi i am About </div>
+        <div>Hi i am About</div>
     )
 }
 
