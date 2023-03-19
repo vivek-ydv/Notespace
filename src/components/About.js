@@ -65,7 +65,7 @@ function About() {
                         <ul className="box input-box">
                             <li className="link_name">About Notespace</li>
                             <li style={{ color: "#F7FFFF" }}>
-                                An online web platform where you can create, edit, upload, delete your notes/information privately and securely without any disturbancee
+                                An online web platform where you can create, edit, upload, delete your notes/information privately and securely without any disturbance
                             </li>
                         </ul>
                     </div>

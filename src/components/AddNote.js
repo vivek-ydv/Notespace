@@ -4,9 +4,9 @@ import NoteContext from "../context/notes/noteContext";
 
 const AddNote = () => {
     const context = useContext(NoteContext);
-    const [note, setNote] = useState({ title: "", description: "", tag: "default" });
+    const [note, setNote] = useState({ title: "", description: "", tag: "" });
     const { addNote } = context;
-    
+
     const handleClick = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
@@ -17,7 +17,7 @@ const AddNote = () => {
     return (
         <>
             <div className="container my-3">
-                <h2>Create A Note</h2>
+                <h2 style={{ fontWeight: "Bold" }}>Create A Note</h2>
                 <p>Add a new note with your info</p>
                 <form>
                     <div className="mb-1">
@@ -61,7 +61,7 @@ const AddNote = () => {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary my-3" onClick={handleClick}>
+                    <button disabled={note.title.length < 3 || note.description.length < 5} type="submit" className="btn btn-primary my-3" onClick={handleClick}>
                         Add Note
                     </button>
                 </form>
