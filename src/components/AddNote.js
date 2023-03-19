@@ -6,6 +6,7 @@ const AddNote = () => {
     const context = useContext(NoteContext);
     const [note, setNote] = useState({ title: "", description: "", tag: "default" });
     const { addNote } = context;
+    
     const handleClick = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
@@ -16,49 +17,51 @@ const AddNote = () => {
     return (
         <>
             <div className="container my-3">
-                <h2>Add a note</h2>
+                <h2>Create A Note</h2>
+                <p>Add a new note with your info</p>
                 <form>
-                    <div className="mb-3">
+                    <div className="mb-1">
                         <label htmlFor="title" className="form-label">
-                            Title
+                            {/* Title  */}
                         </label>
                         <input
                             type="text"
                             className="form-control"
                             id="title"
                             name="title"
-                            placeholder=""
+                            placeholder="Title *"
                             onChange={onChange}
                         />
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="description" className="form-label">
-                            Description
-                        </label>
-                        <textarea
-                            className="form-control"
-                            id="description"
-                            name="description"
-                            rows={3}
-                            defaultValue={""}
-                            onChange={onChange}
-                        />
-                    </div>
-                    <div className="mb-3">
+                    <div className="mb-1">
                         <label htmlFor="tag" className="form-label">
-                            Tag
+                            {/* Tag */}
                         </label>
                         <input
                             type="text"
                             className="form-control"
                             id="tag"
                             name="tag"
-                            placeholder=""
+                            placeholder="Tags *"
+                            onChange={onChange}
+                        />
+                    </div>
+                    <div className="mb-1">
+                        <label htmlFor="description" className="form-label">
+                            {/* Description */}
+                        </label>
+                        <textarea
+                            className="form-control"
+                            id="description"
+                            name="description"
+                            rows={2}
+                            defaultValue={""}
+                            placeholder="Description *"
                             onChange={onChange}
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" onClick={handleClick}>
+                    <button type="submit" className="btn btn-primary my-3" onClick={handleClick}>
                         Add Note
                     </button>
                 </form>

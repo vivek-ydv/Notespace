@@ -16,7 +16,7 @@ function App() {
       <NoteState>
         <BrowserRouter>
           <Navbar />
-          <Alert />
+          {/* <Alert /> */}
           <Routes>
             <Route path="/*" element={<Home />} />
             <Route path="/about" element={<About />} />

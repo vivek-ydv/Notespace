@@ -14,13 +14,15 @@ const Notes = () => {
     return (
         <>
             <AddNote />
-            <div className="container">
-                <div className="row my-3">
-                    <h2>Your Notes</h2>
-                    {notes.map((note) => {
-                        return <Noteitem key={note._id} note={note} />;
-                    })
-                    }
+            <div className="container container-fluid">
+                <h2 >Your Notes</h2>
+                <div className="card-body">
+                    <div className="row my-3">
+                        {notes.map((note) => {
+                            return <Noteitem key={note._id} note={note} />;
+                        })
+                        }
+                    </div>
                 </div>
             </div>
         </>

@@ -2,12 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   let location = useLocation();
-  
+
   return (
     <nav className="navbar navbar-expand-sm bg-light">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Navbar
+          Notespace
         </Link>
         <button
           className="navbar-toggler"
@@ -29,10 +29,9 @@ export const Navbar = () => {
               About
             </Link>
           </div>
-        </div> 
+        </div>
       </div>
     </nav>
-
   )
 }
 
