@@ -68,10 +68,7 @@ const Notes = () => {
                         </div>
                         <div className="modal-body">
                             <form>
-                                <div className="mb-1">
-                                    <label htmlFor="title" className="form-label">
-                                        {/* Title  */}
-                                    </label>
+                                <div className="my-3 material-textfield">
                                     <input
                                         type="text"
                                         className="form-control"
@@ -80,11 +77,11 @@ const Notes = () => {
                                         value={note.etitle}
                                         onChange={onChange}
                                     />
-                                </div>
-                                <div className="mb-1">
-                                    <label htmlFor="tag" className="form-label">
-                                        {/* Tag */}
+                                    <label htmlFor="title" className="form-label">
+                                        Title
                                     </label>
+                                </div>
+                                <div className="my-3 material-textfield">
                                     <input
                                         type="text"
                                         className="form-control"
@@ -93,19 +90,22 @@ const Notes = () => {
                                         value={note.etag}
                                         onChange={onChange}
                                     />
-                                </div>
-                                <div className="mb-1">
-                                    <label htmlFor="description" className="form-label">
-                                        {/* Description */}
+                                    <label htmlFor="tag" className="form-label">
+                                        Tag
                                     </label>
-                                    <textarea
+                                </div>
+                                <div className="my-3 material-textfield">
+                                    <input
+                                        type="text"
                                         className="form-control"
                                         id="edescription"
                                         name="edescription"
-                                        rows={4}
                                         value={note.edescription}
                                         onChange={onChange}
                                     />
+                                    <label htmlFor="description" className="form-label">
+                                        Description
+                                    </label>
                                 </div>
                             </form>
                         </div>
