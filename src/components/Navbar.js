@@ -4,7 +4,7 @@ export const Navbar = () => {
   let location = useLocation();
 
   return (
-    <nav className="navbar navbar-expand-sm bg-light">
+    <nav className="navbar navbar-expand-sm ">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           Notespace

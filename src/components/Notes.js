@@ -4,9 +4,7 @@ import AddNote from "./AddNote";
 import Noteitem from "./Noteitem";
 
 const Notes = () => {
-    const context = useContext(NoteContext);
-    const { notes, getNotes, editNote } = context;
-
+    const { notes, getNotes, editNote } = useContext(NoteContext);
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" });
 
     useEffect(() => {

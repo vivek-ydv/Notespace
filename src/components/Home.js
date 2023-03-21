@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Notes from './Notes'
 
 const Home = () => {
@@ -16,12 +17,8 @@ const Home = () => {
                             </p>
                         </div>
                         <div className="px-2 py-2">
-                            <button type="button" className="btn btn-outline-primary me-3 my-2">
-                                Login
-                            </button>
-                            <button type="button" className="btn btn-outline-primary ">
-                                SignUp
-                            </button>
+                            <Link href="#" className="btn btn-outline-primary me-3 my-2" to="/login" role="button" >Login</Link>
+                            <Link href="#" className="btn btn-outline-primary" to="/signup" role="button" >SignUp</Link>
                         </div>
 
                     </div>

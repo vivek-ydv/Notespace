@@ -12,6 +12,7 @@ body {
 }
 
 /*----------------  Card hover -----------------------*/
+
 .move-up:hover {
   /* background-color: #322b169a; */
   color: white;
@@ -19,6 +20,23 @@ body {
   transform: translateY(-5px);
 }
 
+/*----------------  Login -----------------------*/
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
 
 /* --------------------------------Floating Input Label-------------------------------------- */
 .material-textfield {

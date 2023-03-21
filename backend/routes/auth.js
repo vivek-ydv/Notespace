@@ -16,16 +16,19 @@ router.post('/createuser',
         body('password', 'Password must be atleast 5 characters').isLength({ min: 5 }),
     ],
     async (req, res) => {
+        let success = false;
         // If there is errors then send the bad request and the error
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            success = false;
+            return res.status(400).json({ success, errors: errors.array() });
         }
         try {
             // Check wheater a user already exist with this email or not
             let user = await User.findOne({ email: req.body.email });
             if (user) {
-                return res.status(400).json({ error: "Email is already in use, please try with a different email" });
+                success = false;
+                return res.status(400).json({ success, error: "Email is already in use, please try with a different email" });
             }
             // Creating a secure password with bcryptjs
             const salt = await bcrypt.genSalt(10);
@@ -42,7 +45,8 @@ router.post('/createuser',
                 }
             }
             const authToken = jwt.sign(data, JWT_SECRET);
-            res.json(authToken);
+            success = true;
+            res.json({success, authToken});
 
         } catch (error) {
             console.error(error.message);
@@ -58,23 +62,24 @@ router.post('/login',
         body('password', 'Password Cannot be blank').exists(),
     ],
     async (req, res) => {
+        let success = false;
         // If there is errors then send the bad request and the error
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
         const { email, password } = req.body;
         try {
             let user = await User.findOne({ email });
             // check existence in database
             if (!user) {
-                return res.status(400).json({ error: "Please try to login with correct credentials" });
+                return res.status(400).json({ success, error: "Please try to login with correct credentials" });
             }
             // Compares the password 
             const passCompare = await bcrypt.compare(password, user.password);
             if (!passCompare) {
-                return res.status(400).json({ error: "Please try to login with correct credentials" });
+                success = false;
+                return res.status(400).json({ success, error: "Please try to login with correct credentials" });
             }
             const data = {
                 user: {
@@ -82,7 +87,8 @@ router.post('/login',
                 }
             }
             const authToken = jwt.sign(data, JWT_SECRET);
-            res.json(authToken);
+            success = true;
+            res.json({ success, authToken });
 
         } catch (error) {
             console.error(error.message);
