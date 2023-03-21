@@ -6,25 +6,34 @@ import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 
 
 const Signup = () => {
+    // State to toggle password visibility
     const [showPassword, setShowPassword] = useState(false);
+    // Accessing showAlert function from the Alert context
     const { showAlert } = useContext(alertContext);
+    // State to hold user input credentials
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", confirmPassword: "" });
+    // Navigate to other pages after successful registration
     let navigate = useNavigate();
 
+    // Function to toggle password visibility
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    // Function to update the credentials state object with user inputs
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
+    // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // Check if password and confirm password fields match
         if (credentials.password !== credentials.confirmPassword) {
             showAlert("Passwords do not match.", 'warning');
             return;
         }
+        // Make API call to register the user
         const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
             method: "POST",
             headers: {
@@ -34,12 +43,13 @@ const Signup = () => {
         });
 
         const json = await response.json();
+        // If registration is successful, save auth token to local storage and redirect to notes page
         if (json.success) {
-            //save authtoken & redirect
             localStorage.setItem('token', json.authToken);
             navigate('/notes');
             showAlert(`Welcome ${credentials.name}! Successfully Created Your Account :)`, 'success')
         }
+        // If registration fails, display the error message
         else {
             showAlert(`${json.error}.`, 'warning');
         }
@@ -47,13 +57,26 @@ const Signup = () => {
     return (
         <div>
             <div className="container">
-                <div className="row py-5 mt-4 align-items-center ">
-                    <div className="col-md-5 pr-lg-5 mb-5 mb-md-0 ">
-                        <img src={signupimg} className="img-fluid mb-3 d-none d-md-block" alt="" />
+                {/* Signup form */}
+                <div className="row py-5 mt-4 align-items-center">
+                    <div className="col-md-5 pr-lg-5 mb-5 mb-md-0">
+                        <img
+                            src={signupimg}
+                            className="img-fluid mb-3 d-none d-md-block"
+                            alt=""
+                        />
                     </div>
+
+                    {/* Signup form fields */}
                     <div className="col-md-6 col-lg-5">
-                        <h2 className="mb-4" style={{ color: "#9C27B0", fontWeight: "Bold" }}>Create a new account</h2>
+                        <h2
+                            className="mb-4"
+                            style={{ color: "#9C27B0", fontWeight: "Bold" }}
+                        >
+                            Create a new account
+                        </h2>
                         <form onSubmit={handleSubmit}>
+                            {/* Name input field */}
                             <div className="form-outline mb-4 material-textfield">
                                 <input
                                     type="text"
@@ -68,6 +91,8 @@ const Signup = () => {
                                     Name
                                 </label>
                             </div>
+
+                            {/* Email input field */}
                             <div className="form-outline mb-4 material-textfield">
                                 <input
                                     type="email"
@@ -82,9 +107,11 @@ const Signup = () => {
                                     Email address
                                 </label>
                             </div>
+
+                            {/* Password input field */}
                             <div className="form-outline mb-3 material-textfield">
                                 <input
-                                    type={showPassword ? 'text' : 'password'}
+                                    type={showPassword ? "text" : "password"}
                                     id="password"
                                     name="password"
                                     className="form-control form-control-lg"
@@ -96,11 +123,16 @@ const Signup = () => {
                                 <label className="form-label" htmlFor="password">
                                     Password
                                 </label>
-                                <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
+                                {/* Password visibility toggle button */}
+                                <span
+                                    className="password-toggle-icon"
+                                    onClick={togglePasswordVisibility}
+                                >
                                     {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
                                 </span>
                             </div>
 
+                            {/* Confirm Password input field */}
                             <div className="form-outline mb-3 material-textfield">
                                 <input
                                     type="password"
@@ -116,7 +148,9 @@ const Signup = () => {
                                     Confirm Password
                                 </label>
                             </div>
-                            <div className="text-center  mt-4 pt-2">
+
+                            {/* Signup button and Login link */}
+                            <div className="text-center mt-4 pt-2">
                                 <button
                                     type="submit"
                                     className="btn btn-primary btn-lg mb-3"
@@ -125,7 +159,7 @@ const Signup = () => {
                                     SignUp
                                 </button>
                                 <p className="small fw-bold mt-2 pt-1 mb-0">
-                                    Already registerd ?{" "}
+                                    Already registered?{" "}
                                     <Link to="/login" className="link-danger">
                                         Login
                                     </Link>

@@ -5,19 +5,23 @@ import alertContext from "../context/alerts/alertContext";
 import addnoteimg from '../images/note.svg'
 
 const AddNote = () => {
-    const { addNote } = useContext(NoteContext);
-    const { showAlert } = useContext(alertContext);
-    const [note, setNote] = useState({ title: "", description: "", tag: "" });
+    const { addNote } = useContext(NoteContext); // get the addNote function from the note context
+    const { showAlert } = useContext(alertContext); // get the showAlert function from the alert context
+    const [note, setNote] = useState({ title: "", description: "", tag: "" }); // initialize state for the note form inputs
 
+    // function to handle form submission
     const handleClick = (e) => {
-        e.preventDefault();
-        addNote(note.title, note.description, note.tag);
-        setNote({ title: "", description: "", tag: "" });
-        showAlert('Added Note Sucessfully :)', 'success');
+        e.preventDefault(); // prevent default form submission behavior
+        addNote(note.title, note.description, note.tag); // call the addNote function from the note context with the current note data
+        setNote({ title: "", description: "", tag: "" }); // reset the state for the note form inputs
+        showAlert('Added Note Sucessfully :)', 'success'); // show an alert message to the user using the showAlert function from the alert context
     }
+
+    // function to handle input changes
     const onChange = (e) => {
-        setNote({ ...note, [e.target.name]: e.target.value })
+        setNote({ ...note, [e.target.name]: e.target.value }) // update the state for the note form inputs based on user input
     }
+
     return (
         <>
             <div className="container mt-2">

@@ -17,11 +17,15 @@ import Notes from './components/Notes';
 function App() {
   return (
     <>
+      {/* Wrap the entire application with the AlertState and NoteState providers */}
       <AlertState>
         <NoteState>
           <BrowserRouter>
+            {/* Add the Navbar component to the top of the application */}
             <Navbar />
+            {/* Add the Alert component to display alerts */}
             <Alert />
+            {/* Create a route for the components */}
             <Routes>
               <Route path="/*" element={<Home />} />
               <Route path="/about" element={<About />} />

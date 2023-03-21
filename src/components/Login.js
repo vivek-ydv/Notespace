@@ -5,21 +5,29 @@ import loginimg from '../images/login.svg'
 import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 
 const Login = () => {
+    // State to toggle password visibility
     const [showPassword, setShowPassword] = useState(false);
+    // Get the showAlert function from alertContext
     const { showAlert } = useContext(alertContext);
+    // State to hold email and password credentials
     const [credentials, setCredentials] = useState({ email: "", password: "" });
+    // Get the navigate function from react-router-dom
     let navigate = useNavigate();
 
+    // Function to toggle password visibility
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    // Function to update credentials state when inputs change
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
+    // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // Make a POST request to the login endpoint with email and password
         const response = await fetch(`http://localhost:5000/api/auth/login`, {
             method: "POST",
             headers: {
@@ -30,12 +38,14 @@ const Login = () => {
 
         const json = await response.json();
         if (json.success) {
-            //save authtoken & redirect
+            // If login is successful, save authToken to local storage and redirect to notes page
             localStorage.setItem('token', json.authToken);
             navigate('/notes');
+            // Show success alert
             showAlert('Welcome back! Successfully Loggedin :)', 'success')
         }
         else {
+            // If login is unsuccessful, show warning alert
             showAlert('Inavalid Credentials! Please Login Using Correct Credentials.', 'warning');
         }
     }
@@ -51,6 +61,7 @@ const Login = () => {
                         <h2 className="mb-4" style={{ color: "#9C27B0", fontWeight: "Bold" }}>Log in</h2>
                         <form onSubmit={handleSubmit}>
 
+                            {/* Email input field */}
                             <div className="form-outline mb-4 material-textfield" >
                                 <input
                                     type="email"
@@ -65,6 +76,8 @@ const Login = () => {
                                     Email address
                                 </label>
                             </div>
+
+                            {/* Password input field */}
                             <div className="form-outline mb-3 material-textfield">
                                 <input
                                     type={showPassword ? 'text' : 'password'}
@@ -79,11 +92,14 @@ const Login = () => {
                                 <label className="form-label" htmlFor="password">
                                     Password
                                 </label>
+
+                                {/* Password toggle icon */}
                                 <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
                                     {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
                                 </span>
                             </div>
 
+                            {/* Login button */}
                             <div className="text-center mt-4 pt-2 ">
                                 <button
                                     type="Submit"
@@ -93,6 +109,8 @@ const Login = () => {
                                 >
                                     Login
                                 </button>
+
+                                {/* Signup link */}
                                 <p className="small fw-bold mt-2 pt-1 mb-0">
                                     Don't have an account?{" "}
                                     <Link to="/signup" className="link-danger">

@@ -7,38 +7,45 @@ import { useNavigate } from "react-router-dom";
 import nonoteimg from '../images/nonote.svg'
 
 const Notes = () => {
-    const ref = useRef(null);
-    const refclose = useRef(null);
-    let navigate = useNavigate();
+    const ref = useRef(null); // Ref to launch modal
+    const refclose = useRef(null); // Ref to close modal
+    let navigate = useNavigate(); // Navigate hook for redirecting to login page
 
+    // Getting the showAlert, notes, getNotes, and editNote functions from their respective contexts
     const { showAlert } = useContext(alertContext);
     const { notes, getNotes, editNote } = useContext(NoteContext);
-    const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" });
+    const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" }); // State for the note being edited
 
     useEffect(() => {
+        // Checking if user is logged in by checking for a token in local storage
         if (localStorage.getItem('token')) {
             console.log(localStorage.getItem('token'));
             getNotes();
         }
         else {
+            // Redirecting to login page if user is not logged in
             navigate('/');
         }
         // eslint-disable-next-line
     }, [])
 
+    // Function to handle changes in the input fields
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
 
-    const updateNote = (currNote) => {
-        ref.current.click(); // ref to launch modal
+    // Function to update the note being edited in state and launch the modal
+    const openNoteUpdateModal = (currNote) => {
+        ref.current.click();
         setNote({ id: currNote._id, etitle: currNote.title, edescription: currNote.description, etag: currNote.tag });
     }
 
-    const handleClick = () => {
+    /* Function to handle click on the Update Note button in the modal
+       This function calls the editNote function to update the note on the backend. */
+    const updateNoteOnBackend = () => {
         editNote(note.id, note.etitle, note.edescription, note.etag);
-        refclose.current.click();
-        showAlert('Updated Note Successfully :)', 'success')
+        refclose.current.click(); // Closing the modal
+        showAlert('Updated Note Successfully :)', 'success') // Showing a success alert
     }
 
     return (
@@ -50,6 +57,7 @@ const Notes = () => {
             <div className="container container-fluid ">
                 <h2 className="mb-5" style={{ fontWeight: "Bold" }}>Your <span style={{ color: "#9C27B0", fontWeight: "Bold" }}> Notes </span></h2>
 
+                {/* Checking if there are no notes */}
                 {notes.length === 0 ? (
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <img style={{ width: "15%", marginRight: "1rem" }} src={nonoteimg} alt="no-notes-to-show" />
@@ -58,8 +66,9 @@ const Notes = () => {
                 ) : (
                     <div className="card-body">
                         <div className="row my-3">
+                            {/* Rendering all the notes */}
                             {notes.map((note) => (
-                                <Noteitem key={note._id} note={note} updateNote={updateNote} />
+                                <Noteitem key={note._id} note={note} openNoteUpdateModal={openNoteUpdateModal} />
                             ))}
                         </div>
                     </div>
@@ -150,7 +159,7 @@ const Notes = () => {
                             >
                                 Close
                             </button>
-                            <button disabled={note.etitle.length < 3 || note.edescription.length < 5} type="button" className="btn btn-primary" onClick={handleClick}>
+                            <button disabled={note.etitle.length < 3 || note.edescription.length < 5} type="button" className="btn btn-primary" onClick={updateNoteOnBackend}>
                                 Update Note
                             </button>
                         </div>
