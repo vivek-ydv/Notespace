@@ -17,8 +17,8 @@ const Home = () => {
                             </p>
                         </div>
                         {!localStorage.getItem('token') && <div className="px-2 py-2">
-                            <Link className="btn btn-outline-primary me-3 my-2" to="/login" role="button" >Login</Link>
-                            <Link className="btn btn-outline-primary" to="/signup" role="button" >SignUp For Free</Link>
+                            <Link className="btn btn-lg btn-outline-primary me-3 my-2" to="/login" role="button" >Login</Link>
+                            <Link className="btn btn-lg btn-outline-primary" to="/signup" role="button" >SignUp For Free</Link>
                         </div>
                         }
                         {localStorage.getItem('token') && <div className="px-2 py-2">

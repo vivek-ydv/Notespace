@@ -2,11 +2,18 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import alertContext from "../context/alerts/alertContext";
 import signupimg from '../images/signup.svg'
+import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
+
 
 const Signup = () => {
+    const [showPassword, setShowPassword] = useState(false);
     const { showAlert } = useContext(alertContext);
-    const [credentials, setCredentials] = useState({ name: "", email: "", password: "" });
+    const [credentials, setCredentials] = useState({ name: "", email: "", password: "", confirmPassword: "" });
     let navigate = useNavigate();
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
@@ -14,6 +21,10 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (credentials.password !== credentials.confirmPassword) {
+            showAlert("Passwords do not match.", 'warning');
+            return;
+        }
         const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
             method: "POST",
             headers: {
@@ -43,10 +54,6 @@ const Signup = () => {
                     <div className="col-md-6 col-lg-5">
                         <h2 className="mb-4" style={{ color: "#9C27B0", fontWeight: "Bold" }}>Create a new account</h2>
                         <form onSubmit={handleSubmit}>
-
-                            {/* <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0" style={{ color: "#9C27B0" }}>Or</p>
-                            </div> */}
                             <div className="form-outline mb-4 material-textfield">
                                 <input
                                     type="text"
@@ -77,7 +84,7 @@ const Signup = () => {
                             </div>
                             <div className="form-outline mb-3 material-textfield">
                                 <input
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     id="password"
                                     name="password"
                                     className="form-control form-control-lg"
@@ -89,8 +96,26 @@ const Signup = () => {
                                 <label className="form-label" htmlFor="password">
                                     Password
                                 </label>
+                                <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
+                                    {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
+                                </span>
                             </div>
 
+                            <div className="form-outline mb-3 material-textfield">
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    className="form-control form-control-lg"
+                                    placeholder=" "
+                                    onChange={onChange}
+                                    required
+                                    minLength={5}
+                                />
+                                <label className="form-label" htmlFor="confirmPassword">
+                                    Confirm Password
+                                </label>
+                            </div>
                             <div className="text-center  mt-4 pt-2">
                                 <button
                                     type="submit"
@@ -111,6 +136,6 @@ const Signup = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 export default Signup

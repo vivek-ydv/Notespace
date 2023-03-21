@@ -23,7 +23,7 @@ const AddNote = () => {
             <div className="container mt-2">
                 <div className="row">
                     <div className="col-md-6">
-                        <h2 style={{ fontWeight: "Bold" }}>Create A Note</h2>
+                        <h2 style={{ fontWeight: "Bold" }}>Create a <span style={{ color: "#9C27B0", fontWeight: "Bold" }}> Note </span></h2>
                         <p>Add a new note with your info</p>
                         <form>
                             <div className="my-3 material-textfield">
@@ -69,12 +69,12 @@ const AddNote = () => {
                                 </label>
                             </div>
 
-                            <button disabled={note.title.length < 3 || note.description.length < 5} type="submit" className="btn btn-lg btn-outline-primary my-3" onClick={handleClick}>
+                            <button disabled={note.title.length < 3 || note.description.length < 5} type="submit" className="btn btn-lg btn-outline-primary mt-2" onClick={handleClick}>
                                 Add Note
                             </button>
                         </form>
                     </div>
-                    <div className="col-4 d-sm-none d-md-block ms-5 me-1">
+                    <div className="col-lg-4 col-5 d-sm-none d-md-block ms-5 me-1">
                         <img className="img-fluid " src={addnoteimg} alt='home' />
                     </div>
                 </div>

@@ -2,11 +2,17 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import alertContext from "../context/alerts/alertContext";
 import loginimg from '../images/login.svg'
+import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 
 const Login = () => {
+    const [showPassword, setShowPassword] = useState(false);
     const { showAlert } = useContext(alertContext);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     let navigate = useNavigate();
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
@@ -61,7 +67,7 @@ const Login = () => {
                             </div>
                             <div className="form-outline mb-3 material-textfield">
                                 <input
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     id="password"
                                     name="password"
                                     className="form-control form-control-lg"
@@ -73,6 +79,9 @@ const Login = () => {
                                 <label className="form-label" htmlFor="password">
                                     Password
                                 </label>
+                                <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
+                                    {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
+                                </span>
                             </div>
 
                             <div className="text-center mt-4 pt-2 ">

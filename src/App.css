@@ -31,8 +31,10 @@ body {
 
 
 .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
+  min-height: 100%;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
+  /* These two lines are counted as one :-)       */
 
   display: flex;
   align-items: center;
@@ -83,6 +85,15 @@ input:focus+label {
 input:not(:placeholder-shown)+label {
   top: 0;
   transform: translateY(-50%) scale(.9);
+}
+
+/* -------------------------------------Password show/hide-------------------------------------- */
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 /* -------------------------------------About-------------------------------------- */

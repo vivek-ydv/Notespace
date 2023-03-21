@@ -4,7 +4,7 @@ import alertContext from "../context/alerts/alertContext";
 import AddNote from "./AddNote";
 import Noteitem from "./Noteitem";
 import { useNavigate } from "react-router-dom";
-
+import nonoteimg from '../images/nonote.svg'
 
 const Notes = () => {
     const ref = useRef(null);
@@ -47,16 +47,23 @@ const Notes = () => {
             <AddNote />
 
             {/* Rendering all noteitems */}
-            <div className="container container-fluid">
-                <h2 style={{ fontWeight: "Bold" }}>Your Notes</h2>
-                <div className="card-body">
-                    <div className="row my-3">
-                        {notes.map((note) => {
-                            return <Noteitem key={note._id} note={note} updateNote={updateNote} />;
-                        })
-                        }
+            <div className="container container-fluid ">
+                <h2 className="mb-5" style={{ fontWeight: "Bold" }}>Your <span style={{ color: "#9C27B0", fontWeight: "Bold" }}> Notes </span></h2>
+
+                {notes.length === 0 ? (
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <img style={{ width: "15%", marginRight: "1rem" }} src={nonoteimg} alt="no-notes-to-show" />
+                        <h3 style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#333" }}>Add Your First Note :)</h3>
                     </div>
-                </div>
+                ) : (
+                    <div className="card-body">
+                        <div className="row my-3">
+                            {notes.map((note) => (
+                                <Noteitem key={note._id} note={note} updateNote={updateNote} />
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Modal  */}
