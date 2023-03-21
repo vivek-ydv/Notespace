@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
+import alertContext from "../context/alerts/alertContext";
 
 const Signup = () => {
+    const { showAlert } = useContext(alertContext);
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "" });
     let navigate = useNavigate();
 
@@ -20,14 +22,14 @@ const Signup = () => {
         });
 
         const json = await response.json();
-        console.log(json);
         if (json.success) {
             //save authtoken & redirect
             localStorage.setItem('token', json.authToken);
             navigate('/');
+            showAlert(`Welcome ${credentials.name}! Successfully Created Your Account :)`, 'success')
         }
         else {
-            alert('User already exist');
+            showAlert(`${json.error}.`, 'warning');
         }
     }
     return (

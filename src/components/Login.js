@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
+import alertContext from "../context/alerts/alertContext";
 
 const Login = () => {
+    const { showAlert } = useContext(alertContext);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     let navigate = useNavigate();
 
@@ -24,9 +26,10 @@ const Login = () => {
             //save authtoken & redirect
             localStorage.setItem('token', json.authToken);
             navigate('/');
+            showAlert('Welcome back! Successfully Loggedin :)','success')
         }
         else {
-            alert('Inavalid Credentials');
+            showAlert('Inavalid Credentials! Please Login Using Correct Credentials.','warning');
         }
     }
 

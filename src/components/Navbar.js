@@ -1,8 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import alertContext from "../context/alerts/alertContext";
 
 export const Navbar = () => {
+  let navigate = useNavigate();
   let location = useLocation();
+  let { showAlert } = useContext(alertContext);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+   showAlert('Good Bye! Logged Out Successfully ;(','success');
+  }
   return (
     <nav className="navbar navbar-expand-sm ">
       <div className="container-fluid">
@@ -29,6 +38,9 @@ export const Navbar = () => {
               About
             </Link>
           </div>
+          {localStorage.getItem('token') && <div className="d-flex ms-auto me-2">
+            <button className="btn btn-outline-primary" onClick={handleLogout}  >Logout</button>
+          </div>}
         </div>
       </div>
     </nav>

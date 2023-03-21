@@ -1,37 +1,48 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../context/notes/noteContext";
+import alertContext from "../context/alerts/alertContext";
 import AddNote from "./AddNote";
 import Noteitem from "./Noteitem";
+import { useNavigate } from "react-router-dom";
+
 
 const Notes = () => {
+    const ref = useRef(null);
+    const refclose = useRef(null);
+    let navigate = useNavigate();
+    const { showAlert } = useContext(alertContext);
     const { notes, getNotes, editNote } = useContext(NoteContext);
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" });
 
     useEffect(() => {
-        getNotes();
+        if (localStorage.getItem('token')) {
+            console.log(localStorage.getItem('token'));
+            getNotes();
+        }
+        else{
+           navigate('/login');
+        }
         // eslint-disable-next-line
     }, [])
-
-    const updateNote = (currNote) => {
-        ref.current.click();
-        setNote({ id: currNote._id, etitle: currNote.title, edescription: currNote.description, etag: currNote.tag });
-    }
-
-    const handleClick = (e) => {
-        editNote(note.id, note.etitle, note.edescription, note.etag);
-        refclose.current.click();
-    }
 
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
 
-    const ref = useRef(null);
-    const refclose = useRef(null)
+    const updateNote = (currNote) => {
+        ref.current.click(); // ref to launch modal
+        setNote({ id: currNote._id, etitle: currNote.title, edescription: currNote.description, etag: currNote.tag });
+    }
+
+    const handleClick = () => {
+        editNote(note.id, note.etitle, note.edescription, note.etag);
+        refclose.current.click();
+        showAlert('Updated Note Successfully :)', 'success')
+    }
+
     return (
         <>
             <AddNote />
-
             {/* Modal  */}
             <button
                 ref={ref}
