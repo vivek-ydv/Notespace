@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 function About() {
     return (
         <div>
-
-            <div className="container my-5">
+            <div className="container my-3">
                 <div className="row">
                     <div className="col-md-6 d-flex flex-column justify-content-center">
                         <h1 className="display-4 mb-4">Empowering <span style={{ color: "#9C27B0" }} >Students</span> </h1>
@@ -43,11 +42,11 @@ function About() {
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/new">New Notes</Link></li>
                             <li><Link to="/about">About us</Link></li>
-                            <li><Link to="/">Get started</Link></li>
+                            <li><Link to="/signup">Get started</Link></li>
                         </ul>
                         <ul className="box">
                             <li className="link_name">Services</li>
-                            <li><Link to="/">Your Notes</Link></li>
+                            <li><Link to="/notes">Your Notes</Link></li>
                             <li><Link to="/new">New Note</Link></li>
                         </ul>
                         <ul className="box">
@@ -57,10 +56,10 @@ function About() {
                         </ul>
                         <ul className="box">
                             <li className="link_name">Top Categories</li>
-                            <li><Link to="/c/61554bfe801949ad7b9be4ff">Tent Notes</Link></li>
-                            <li><Link to="/c/61554c2753bcf306407cb1bd">RV and Van Notes</Link></li>
-                            <li><Link to="/c/61554c43d2a6b15f764aff36">Canoe Notes</Link></li>
-                            <li><Link to="c/61554c63dfd6a37d71449b5c">Survivalist Notes</Link></li>
+                            <li><Link to="/notes">Tent Notes</Link></li>
+                            <li><Link to="/notes">RV and Van Notes</Link></li>
+                            <li><Link to="/notes">Canoe Notes</Link></li>
+                            <li><Link to="/notes">Survivalist Notes</Link></li>
                         </ul>
                         <ul className="box input-box">
                             <li className="link_name">About Notespace</li>

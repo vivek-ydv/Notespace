@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import NoteState from './context/notes/NoteState';
 import AlertState from './context/alerts/AlertState';
+import Notes from './components/Notes';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/notes" element={<Notes />} />
             </Routes>
           </BrowserRouter>
         </NoteState>

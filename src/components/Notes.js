@@ -10,6 +10,7 @@ const Notes = () => {
     const ref = useRef(null);
     const refclose = useRef(null);
     let navigate = useNavigate();
+
     const { showAlert } = useContext(alertContext);
     const { notes, getNotes, editNote } = useContext(NoteContext);
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" });
@@ -19,8 +20,8 @@ const Notes = () => {
             console.log(localStorage.getItem('token'));
             getNotes();
         }
-        else{
-           navigate('/login');
+        else {
+            navigate('/');
         }
         // eslint-disable-next-line
     }, [])
@@ -42,7 +43,22 @@ const Notes = () => {
 
     return (
         <>
+            {/* Component to add a new note*/}
             <AddNote />
+
+            {/* Rendering all noteitems */}
+            <div className="container container-fluid">
+                <h2 style={{ fontWeight: "Bold" }}>Your Notes</h2>
+                <div className="card-body">
+                    <div className="row my-3">
+                        {notes.map((note) => {
+                            return <Noteitem key={note._id} note={note} updateNote={updateNote} />;
+                        })
+                        }
+                    </div>
+                </div>
+            </div>
+
             {/* Modal  */}
             <button
                 ref={ref}
@@ -135,18 +151,6 @@ const Notes = () => {
                 </div>
             </div>
 
-            {/* Creating noteitems */}
-            <div className="container container-fluid">
-                <h2 style={{ fontWeight: "Bold" }}>Your Notes</h2>
-                <div className="card-body">
-                    <div className="row my-3">
-                        {notes.map((note) => {
-                            return <Noteitem key={note._id} note={note} updateNote={updateNote} />;
-                        })
-                        }
-                    </div>
-                </div>
-            </div>
         </>
     )
 }

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import alertContext from "../context/alerts/alertContext";
+import loginimg from '../images/login.svg'
 
 const Login = () => {
     const { showAlert } = useContext(alertContext);
@@ -25,29 +26,25 @@ const Login = () => {
         if (json.success) {
             //save authtoken & redirect
             localStorage.setItem('token', json.authToken);
-            navigate('/');
-            showAlert('Welcome back! Successfully Loggedin :)','success')
+            navigate('/notes');
+            showAlert('Welcome back! Successfully Loggedin :)', 'success')
         }
         else {
-            showAlert('Inavalid Credentials! Please Login Using Correct Credentials.','warning');
+            showAlert('Inavalid Credentials! Please Login Using Correct Credentials.', 'warning');
         }
     }
-
 
     return (
         <div>
             <div className="container my-5">
                 <div className="row py-5 mt-4 align-items-center">
-                    <div className="col-md-5 pr-lg-5 mb-5 mb-md-0 ">
-                        <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" className="img-fluid mb-3 d-none d-md-block" />
+                    <div className="col-md-5 pr-lg-5 mb-5 mb-md-0">
+                        <img src={loginimg} alt="" className="img-fluid mb-3 d-none d-md-block" />
                     </div>
                     <div className="col-md-6 col-lg-5 ml-auto">
                         <h2 className="mb-4" style={{ color: "#9C27B0", fontWeight: "Bold" }}>Log in</h2>
                         <form onSubmit={handleSubmit}>
 
-                            {/* <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0" style={{ color: "#9C27B0" }}>Or</p>
-                            </div> */}
                             <div className="form-outline mb-4 material-textfield" >
                                 <input
                                     type="email"

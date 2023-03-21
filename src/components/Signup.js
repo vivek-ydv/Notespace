@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import alertContext from "../context/alerts/alertContext";
+import signupimg from '../images/signup.svg'
 
 const Signup = () => {
     const { showAlert } = useContext(alertContext);
@@ -25,7 +26,7 @@ const Signup = () => {
         if (json.success) {
             //save authtoken & redirect
             localStorage.setItem('token', json.authToken);
-            navigate('/');
+            navigate('/notes');
             showAlert(`Welcome ${credentials.name}! Successfully Created Your Account :)`, 'success')
         }
         else {
@@ -37,7 +38,7 @@ const Signup = () => {
             <div className="container">
                 <div className="row py-5 mt-4 align-items-center ">
                     <div className="col-md-5 pr-lg-5 mb-5 mb-md-0 ">
-                        <img src="https://preview.colorlib.com/theme/bootstrap/login-form-07/images/undraw_remotely_2j6y.svg" className="img-fluid mb-3 d-none d-md-block" alt="" />
+                        <img src={signupimg} className="img-fluid mb-3 d-none d-md-block" alt="" />
                     </div>
                     <div className="col-md-6 col-lg-5">
                         <h2 className="mb-4" style={{ color: "#9C27B0", fontWeight: "Bold" }}>Create a new account</h2>

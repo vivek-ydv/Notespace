@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Notes from './Notes'
+import homeimg from '../images/homepage.svg'
 
 const Home = () => {
     return (
@@ -18,21 +18,24 @@ const Home = () => {
                         </div>
                         {!localStorage.getItem('token') && <div className="px-2 py-2">
                             <Link className="btn btn-outline-primary me-3 my-2" to="/login" role="button" >Login</Link>
-                            <Link className="btn btn-outline-primary" to="/signup" role="button" >SignUp</Link>
+                            <Link className="btn btn-outline-primary" to="/signup" role="button" >SignUp For Free</Link>
                         </div>
                         }
-                        
+                        {localStorage.getItem('token') && <div className="px-2 py-2">
+                            <Link className="btn btn-lg btn-outline-primary me-3 my-2" to="/notes" role="button" >Create New Note</Link>
+                        </div>
+                        }
+
                     </div>
+
                     <div className="col-md-6">
-                        <img className="img-fluid awesome"
-                            src="https://img.freepik.com/free-vector/happy-freelancer-with-computer-home-young-man-sitting-armchair-using-laptop-chatting-online-smiling-vector-illustration-distance-work-online-learning-freelance_74855-8401.jpg?w=900&t=st=1667037491~exp=1667038091~hmac=7c71ea8afc8f3cc8065c5ccc05d105e3c8a7b76f0133016cb210a7882dc19611"
-                            alt="about-awesome" />
+                        <img className="img-fluid " src={homeimg} alt='home' />
                     </div>
                 </div>
             </div>
 
             {/* Notes Component */}
-            <Notes />
+            {/* <Notes /> */}
         </>
 
     )
