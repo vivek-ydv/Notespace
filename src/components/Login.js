@@ -38,9 +38,9 @@ const Login = () => {
 
         const json = await response.json();
         if (json.success) {
-            // If login is successful, save authToken to local storage and redirect to notes page
+            // If login is successful, save authToken to local storage and redirect to home page
             localStorage.setItem('token', json.authToken);
-            navigate('/notes');
+            navigate('/');
             // Show success alert
             showAlert('Welcome back! Successfully Loggedin :)', 'success')
         }

@@ -73,13 +73,13 @@ const AddNote = () => {
                                 </label>
                             </div>
 
-                            <button disabled={note.title.length < 3 || note.description.length < 5} type="submit" className="btn btn-lg btn-outline-primary mt-2" onClick={handleClick}>
+                            <button disabled={note.title.length < 3 || note.description.length < 5} type="submit" className="btn btn-lg btn-outline-primary mt-2 mb-3" onClick={handleClick}>
                                 Add Note
                             </button>
                         </form>
                     </div>
-                    <div className="col-lg-4 col-5 d-sm-none d-md-block ms-5 me-1">
-                        <img className="img-fluid " src={addnoteimg} alt='home' />
+                    <div className="col-lg-4 col-5 d-sm-none  d-md-block ms-5 me-1">
+                        <img className="img-fluid d-none d-sm-block" src={addnoteimg} alt='home' />
                     </div>
                 </div>
             </div>
