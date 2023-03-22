@@ -3,7 +3,7 @@
         {
             "src": "/backend/index.js",
             "use": "@vercel/node"
-        }
+        },
         {
             "src": "package.json",
             "use": "vercel-sapper"
