@@ -1,5 +1,5 @@
 {
-    "routes": [
+    "reweites": [
         {
             "src": "/backend/(.*)",
             "dest": "index.js "
