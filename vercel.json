@@ -1,17 +1,13 @@
 {
     "builds": [
         {
-            "src": "/backend/index.js",
+            "src": "./backend/index.js",
             "use": "@vercel/node"
-        },
-        {
-            "src": "package.json",
-            "use": "vercel-sapper"
         }
     ],
     "routes": [
         {
-            "src": "/backend/(.*)",
+            "src": "./backend/(.*)",
             "dest": "index.js "
         }
     ]
