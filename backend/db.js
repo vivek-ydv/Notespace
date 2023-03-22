@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
+const { MONGOURI } = require('../config/keys');
 
-const mongoURI = "mongodb+srv://vivekydv:vivekCluster0@cluster0.csr861r.mongodb.net/noteSpace?retryWrites=true&w=majority";
 
 const connectToMongo = async () => {
     try {
         mongoose.set('strictQuery', false);
-        await mongoose.connect(mongoURI, {
+        await mongoose.connect(MONGOURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });

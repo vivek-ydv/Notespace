@@ -13,6 +13,15 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 
+if (process.env.NODE_ENV == 'production') {
+    const path = require('path');
+
+    app.get('/*', (req, res) => {
+        app.use(express.static(path.join(__dirname, 'build')));
+        res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    })
+}
+
 app.listen(port, () => {
     console.log(`Listening on port http://localhost:${port}`);
 })
