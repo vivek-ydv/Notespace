@@ -3,7 +3,7 @@ import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
     // Store the API endpoint in the host constant
-    const host = process.env.REACT_APP_API_URL;
+    const host = "http://localhost:5000";
 
     // Initialize notesInital variable as an empty array
     let notesInital = [];
