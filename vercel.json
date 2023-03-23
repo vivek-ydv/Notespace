@@ -1,6 +1,6 @@
 {
   "routes":[
-    {"src": "/api/.*","des": "/backend/index.js"},
+    {"src": "/api/.*","dest": "/backend/index.js"},
     {"src":"/(.*)","dest":"/src/index.js"}
     ]
 }
