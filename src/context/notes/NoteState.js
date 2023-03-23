@@ -14,7 +14,7 @@ const NoteState = (props) => {
     // Create a function 'getNotes' to fetch all notes from the server
     const getNotes = async (title, description, tag) => {
         // API CALL
-        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        const response = await fetch(`${host}api/notes/fetchallnotes`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const NoteState = (props) => {
     // Create a function 'addNote' to add a note to the server
     const addNote = async (title, description, tag) => {
         // API CALL
-        const response = await fetch(`${host}/api/notes/addnote`, {
+        const response = await fetch(`${host}api/notes/addnote`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const NoteState = (props) => {
     // Create a function 'deleteNote' to delete a note from the server
     const deleteNote = async (id) => {
         // API CALL
-        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        const response = await fetch(`${host}api/notes/deletenote/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const NoteState = (props) => {
     // Create a function 'editNote' to edit a note on the server
     const editNote = async (id, title, description, tag) => {
         //API CALL
-        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+        const response = await fetch(`${host}api/notes/updatenote/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

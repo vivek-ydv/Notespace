@@ -31,7 +31,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Make a POST request to the login endpoint with email and password
-        const response = await fetch(`${host}/api/auth/login`, {
+        const response = await fetch(`${host}api/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
