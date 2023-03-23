@@ -40,6 +40,7 @@ const Login = () => {
         if (json.success) {
             // If login is successful, save authToken to local storage and redirect to home page
             localStorage.setItem('token', json.authToken);
+            console.log(localStorage.getItem('token'));
             navigate('/');
             // Show success alert
             showAlert('Welcome back! Successfully Loggedin :)', 'success')
