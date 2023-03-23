@@ -20,7 +20,7 @@ function App() {
       {/* Wrap the entire application with the AlertState and NoteState providers */}
       <AlertState>
         <NoteState>
-          <BrowserRouter>
+          <BrowserRouter basename='/'>
             {/* Add the Navbar component to the top of the application */}
             <Navbar />
             {/* Add the Alert component to display alerts */}
