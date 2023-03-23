@@ -33,8 +33,11 @@ const Signup = () => {
             showAlert("Passwords do not match.", 'warning');
             return;
         }
+        // Store the API endpoint in the host constant
+        const host = process.env.REACT_APP_API_URL;
+
         // Make API call to register the user
-        const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
+        const response = await fetch(`${host}/api/auth/createuser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -24,11 +24,14 @@ const Login = () => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
+    // Store the API endpoint in the host constant
+    const host = process.env.REACT_APP_API_URL;
+
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Make a POST request to the login endpoint with email and password
-        const response = await fetch(`http://localhost:5000/api/auth/login`, {
+        const response = await fetch(`${host}/api/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +43,6 @@ const Login = () => {
         if (json.success) {
             // If login is successful, save authToken to local storage and redirect to home page
             localStorage.setItem('token', json.authToken);
-            console.log(localStorage.getItem('token'));
             navigate('/');
             // Show success alert
             showAlert('Welcome back! Successfully Loggedin :)', 'success')
