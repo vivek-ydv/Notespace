@@ -1,6 +1,7 @@
 const connectToMongo = require('./db');
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config()
 
 connectToMongo(); // connection to mongoDB
 const app = express();
@@ -12,11 +13,9 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 
-if (process.env.NODE_ENV === 'development') {
-    const port = process.env.PORT || 5000;
-    app.listen(port, () => {
-        console.log(`Listening on port http://localhost:${port}`);
+if (process.env.API_PORT) {
+    app.listen(process.env.API_PORT, () => {
+        console.log(`Listening on port http://localhost:${process.env.API_PORT}`);
     });
 }
-
 module.exports = app;
