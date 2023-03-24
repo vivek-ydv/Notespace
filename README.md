@@ -2,13 +2,13 @@
 ### An online web platform where you can create, edit, upload, delete your notes/information privately and securely without any disturbance.
 ### **Live Link -**  https://notespaceapp.vercel.app/
 
-## Built With
+### Built With - 
 
-* [React.js](https://reactjs.org/)
-* [Nodejs](https://nodejs.org/en/)
-* [Expressjs](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
-* [mongoose](https://mongoosejs.com/)
+* [Expressjs](https://expressjs.com/)
+* [React.js](https://reactjs.org/) 
+* [Nodejs](https://nodejs.org/en/)
+* [Mongoose](https://mongoosejs.com/)
 * [Bootstrap](https://getbootstrap.com)
 
 ### ScreenShots -
