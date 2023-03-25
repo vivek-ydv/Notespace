@@ -49,9 +49,10 @@ This is an example of how to list things you need to use the software and how to
    ```
 4. Enter your env variables in `.env`
    ```js
-   API_PORT= 5000
-   REACT_APP_API_URL= http://localhost:5000/
-   JWT_KEY= Your-secret
+   API_PORT = 5000
+   REACT_APP_API_URL = http://localhost:5000/
+   JWT_KEY = Your-Secret
+   MONGOURI = Your_URI
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
